@@ -1,0 +1,19 @@
+{% extends 'todo_app/base.html' %}
+{% block content %}
+    <h2>All Tasks</h2>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <strong>{{ task.title }}</strong>
+                {% if task.completed %}(Completed){% endif %}
+                <a href="{% url 'update_task' task.id %}">
+                    Mark as {% if task.completed %}Incomplete{% else %}Complete{% endif %}
+                </a> |
+                
+                <a href="{% url 'delete_task' task.id %}">Delete</a>
+            </li>
+        {% empty %}
+            <p>No tasks yet!</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
